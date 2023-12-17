@@ -1,7 +1,7 @@
-import 'package:demo_flutter/utils/spaces.dart';
-import 'package:demo_flutter/widgets/gradient_button.dart';
-import 'package:demo_flutter/widgets/input_field.dart';
-import 'package:demo_flutter/widgets/social_button.dart';
+import 'package:demo_flutter/presentation/utils/spaces.dart';
+import 'package:demo_flutter/presentation/widgets/gradient_button.dart';
+import 'package:demo_flutter/presentation/widgets/input_field.dart';
+import 'package:demo_flutter/presentation/widgets/social_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:demo_flutter/utils/app_colors.dart';
+import 'package:demo_flutter/presentation/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class GradientButton extends StatelessWidget {
