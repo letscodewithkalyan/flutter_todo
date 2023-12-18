@@ -1,12 +1,11 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 class Weather extends Equatable {
   final String cityName;
   final String main;
   final String description;
   final String iconCode;
-  final String temperature;
+  final double temperature;
   final int pressure;
   final int humidity;
   const Weather({
@@ -20,7 +19,6 @@ class Weather extends Equatable {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props =>
       [cityName, description, humidity, iconCode, main, pressure, temperature];
 }

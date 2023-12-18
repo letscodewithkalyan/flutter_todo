@@ -49,7 +49,9 @@ class _LoginPageState extends State<LoginPage> {
               verticalSpacing(15),
               const InputField(hintText: "Password"),
               const SizedBox(height: 15),
-              const GradientButton(text: 'Sign In')
+              GradientButton(
+                  text: 'Sign In',
+                  onPressed: () => {Navigator.pushNamed(context, '/home')})
             ],
           )),
     ));

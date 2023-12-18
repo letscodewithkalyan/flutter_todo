@@ -1,7 +1,5 @@
 import 'package:demo_flutter/data/constants.dart';
 import 'package:demo_flutter/presentation/feature/weather/weather_bloc.dart';
-import 'package:demo_flutter/presentation/feature/weather/weather_event.dart';
-import 'package:demo_flutter/presentation/feature/weather/weather_state.dart';
 import 'package:demo_flutter/presentation/utils/spaces.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +22,7 @@ class WeatherPage extends StatelessWidget {
               hintText: 'Enter city name',
             ),
             onChanged: (query) {
+              //BlocProvider.of<WeatherBloc>(context).add(OnCityChanged(query));
               context.read<WeatherBloc>().add(OnCityChanged(query));
             },
           ),

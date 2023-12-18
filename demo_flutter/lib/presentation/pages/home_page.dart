@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:demo_flutter/data/models/album.dart';
+import 'package:demo_flutter/presentation/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,20 +27,26 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Fetch Data Example'),
       ),
-      body: Center(
-          child: FutureBuilder<List<Album>>(
-        future: futureAlbum,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return PhotosList(albums: snapshot.data!);
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          }
+      body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Expanded(
+            child: Center(
+                child: FutureBuilder<List<Album>>(
+          future: futureAlbum,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return PhotosList(albums: snapshot.data!);
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
 
-          // By default, show a loading spinner.
-          return const CircularProgressIndicator();
-        },
-      )),
+            // By default, show a loading spinner.
+            return const CircularProgressIndicator();
+          },
+        ))),
+        GradientButton(
+            text: 'Navigate to Weather',
+            onPressed: () => {Navigator.pushNamed(context, '/weather')}),
+      ]),
     );
   }
 }
