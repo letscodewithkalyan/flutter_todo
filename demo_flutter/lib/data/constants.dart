@@ -5,4 +5,5 @@ class Urls {
       '$baseUrl/weather?q=$city&appid=$apiKey';
   static String weatherIcon(String iconCode) =>
       'http://openweathermap.org/img/wn/$iconCode@2x.png';
+  static String albumDataSource = "https://jsonplaceholder.typicode.com/photos";
 }
