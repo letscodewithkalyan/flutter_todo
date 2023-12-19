@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
   final String hintText;
-  const InputField({Key? key, required this.hintText}) : super(key: key);
+  final TextEditingController? controller;
+  InputField({Key? key, required this.hintText, required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
           hintText: hintText,
           enabledBorder: OutlineInputBorder(

@@ -1,3 +1,4 @@
+import 'package:demo_flutter/presentation/feature/auth/bloc/authentication_bloc.dart';
 import 'package:demo_flutter/presentation/feature/weather/weather_bloc.dart';
 import 'package:demo_flutter/presentation/pages/home_page.dart';
 import 'package:demo_flutter/presentation/pages/login_page.dart';
@@ -20,6 +21,8 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<WeatherBloc>(create: (_) => di.locator<WeatherBloc>()),
+          BlocProvider<AuthenticationBloc>(
+              create: (_) => di.locator<AuthenticationBloc>()),
         ],
         child: MaterialApp(
           theme: ThemeData.dark().copyWith(
