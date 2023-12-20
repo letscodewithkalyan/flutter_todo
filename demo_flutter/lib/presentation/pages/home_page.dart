@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'package:demo_flutter/domain/entities/album.dart';
+import 'package:demo_flutter/presentation/feature/album/album_bloc.dart';
 import 'package:demo_flutter/presentation/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = getAlbums();
+    context.read<AlbumBloc>().add(GetAlbumsEvent());
   }
 
   @override
@@ -27,18 +27,15 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Fetch Data Example'),
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Expanded(
-            child: Center(
-                child: FutureBuilder<List<Album>>(
-          future: futureAlbum,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return PhotosList(albums: snapshot.data!);
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
+        Expanded(child: Center(child: BlocBuilder<AlbumBloc, AlbumState>(
+          builder: (context, state) {
+            if (state is AlbumLoading) {
+              return const CircularProgressIndicator();
+            } else if (state is AlbumHasData) {
+              return PhotosList(albums: state.result);
+            } else if (state is AlbumError) {
+              return Text(state.errorMessage);
             }
-
-            // By default, show a loading spinner.
             return const CircularProgressIndicator();
           },
         ))),
@@ -47,18 +44,6 @@ class _HomePageState extends State<HomePage> {
             onPressed: () => {Navigator.pushNamed(context, '/weather')}),
       ]),
     );
-  }
-}
-
-Future<List<Album>> getAlbums() async {
-  final response =
-      await http.get(Uri.parse("https://jsonplaceholder.typicode.com/photos"));
-  if (response.statusCode == 200) {
-    final parsed =
-        (jsonDecode(response.body) as List).cast<Map<String, dynamic>>();
-    return parsed.map<Album>((json) => Album.fromJson(json)).toList();
-  } else {
-    throw Exception('Failed to load album');
   }
 }
 

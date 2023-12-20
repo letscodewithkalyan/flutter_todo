@@ -9,10 +9,10 @@ class AlbumRepositoryImpl implements AlbumRepository {
   final AlbumDataSource albumDataSource;
   AlbumRepositoryImpl({required this.albumDataSource});
   @override
-  Future<Either<Failure, Album>> getAlbum() async {
+  Future<Either<Failure, List<Album>>> getAlbum() async {
     try {
       final result = await albumDataSource.getAlbums();
-      return Right(result.toEntity());
+      return Right(result.map((e) => e.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));
     } on Exception {

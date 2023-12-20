@@ -16,4 +16,8 @@ final class AlbumError extends AlbumState {
   const AlbumError(this.errorMessage);
 }
 
-final class AlbumHasData extends AlbumState {}
+final class AlbumHasData extends AlbumState {
+  final List<Album> result;
+  const AlbumHasData(this.result);
+  List<Object> get props => [result];
+}
